@@ -10,7 +10,7 @@ VK Notifyer is a application to get VK notifications on a desktop.
 4. Build solution
 5. Set version to release and run program.
 6. Locate folder *project_folder/VK_Notifyer/bin/Release
-7. In the newly generated foolder you can find exe, make a shortcut and add it to startup menu
+7. In the newly generated folder you can find exe, make a shortcut and add it to startup menu
 
 
 ## Contributing
