@@ -1,0 +1,80 @@
+﻿<Window x:Class="NotificationManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NotificationManager"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="Notification_Title" 
+        Height="120" Width="420" ResizeMode="NoResize" 
+        Topmost="True" ShowInTaskbar="False">
+
+    <Window.Resources>
+        <Style x:Key="Cabin">
+            <Setter Property="TextElement.FontFamily" Value="Resource/#Cabin" />
+        </Style>
+    </Window.Resources>
+    <Window.Effect>
+        <DropShadowEffect Color="#171717" BlurRadius="22" RenderingBias="Quality"/>
+    </Window.Effect>
+
+    <Grid x:Name="MainGrid" Margin="20" Background="#171717">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="0" Grid.RowSpan="5" Fill="#8034eb"></Rectangle>
+        <Rectangle Grid.Column="1" Grid.RowSpan="5">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#8034eb" Offset="0.0" />
+                    <GradientStop Color="#1b1721" Offset="0.5" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Grid.Column="2" Grid.ColumnSpan="10" Grid.Row="0" Grid.RowSpan="10">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#1b1721" Offset="0.0" />
+                    <GradientStop Color="#151417" Offset="0.5" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Button Grid.Column="5" Grid.Row="1" BorderThickness="0" Background="Transparent"
+            Name="CloseNotification" Click="CloseNotification_Click"
+            Content="✕" Foreground="#ba2245" VerticalContentAlignment="Top" 
+            HorizontalContentAlignment="Center" FontSize="15" />
+        <Label x:Name="SenderData"
+            Style="{DynamicResource Cabin}" 
+            Grid.Column="3" Grid.Row="1" 
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Foreground="#bdbdbd"
+            FontSize="16"
+            Content="{Binding SenderData_p, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label 
+            Grid.Column="3" Grid.Row="3" 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Foreground="#b0bfbc"
+            FontSize="14"
+            Content="{Binding MSGData_p, UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>
