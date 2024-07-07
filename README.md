@@ -1,6 +1,6 @@
-# VK Notifyer
+# VK Notifier
 
-VK Notifyer is a application to get VK notifications on a desktop. 
+VK Notifier is a application to get VK notifications on a desktop. 
 
 ## Installation
 
