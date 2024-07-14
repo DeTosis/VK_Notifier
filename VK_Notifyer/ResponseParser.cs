@@ -38,6 +38,7 @@ internal class ResponseParser
                 } else continue;
             }
         }
+        Notify();
     }
 
     private void Notify() {

@@ -1,4 +1,5 @@
 ﻿using NotificationManager;
+using System.Media;
 using System.Timers;
 
 internal class NotificationHandler
@@ -6,9 +7,15 @@ internal class NotificationHandler
     (dynamic, dynamic, string) output;
     MainWindow window;
 
+    static string workingDirectory = Environment.CurrentDirectory;
+    static string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+    static SoundPlayer player = new($"{projectDirectory}\\Sound\\n_sound.wav");
+
     public NotificationHandler((dynamic, dynamic, string) output) {
         this.output = output;
         Notify();
+        player.Load();
+        player.Play();
     }
 
     private void Notify() {
