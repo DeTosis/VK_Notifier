@@ -27,9 +27,7 @@ class Program
             trayIcon.Text = "Vk Notifier";
 
             string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-
-            trayIcon.Icon = new Icon($"{projectDirectory}\\Resources\\vkIco.ico");
+            trayIcon.Icon = new Icon($"{workingDirectory}\\Resources\\vkIco.ico");
 
             ContextMenu trayMenu = new ContextMenu();
 

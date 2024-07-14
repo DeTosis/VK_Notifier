@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\vkIco.ico" />
     <None Remove="Sound\n_sound.mp3" />
+    <None Remove="Sound\n_sound.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Content Include="Resources\vkIco.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sound\n_sound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

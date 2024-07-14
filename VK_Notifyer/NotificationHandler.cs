@@ -8,8 +8,7 @@ internal class NotificationHandler
     MainWindow window;
 
     static string workingDirectory = Environment.CurrentDirectory;
-    static string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-    static SoundPlayer player = new($"{projectDirectory}\\Sound\\n_sound.wav");
+    static SoundPlayer player = new($"{workingDirectory}\\Sound\\n_sound.wav");
 
     public NotificationHandler((dynamic, dynamic, string) output) {
         this.output = output;
