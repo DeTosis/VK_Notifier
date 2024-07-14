@@ -5,7 +5,7 @@
             string output = "";
             for (int i = 0; i < 35; i++)
                 output += str[i];
-            return output + "...";
+            return output + " ...";
         }
        return str;
     }

@@ -1,11 +1,13 @@
-﻿internal class response_Parser
+﻿using VK_Notifyer;
+
+internal class ResponseParser
 {
-    private static List<string> notifiedMessages = new List<string>();
-    private static List<(dynamic, dynamic, string)> notificationQueue = new List<(dynamic, dynamic, string)>();
-    private getUsers _getUsers;
+    private static List<string> notifiedMessages = new();
+    private static List<(dynamic, dynamic, string)> notificationQueue = new();
+    private GetUsers _getUsers;
     private NotificationHandler notification;
 
-    public response_Parser(getUsers getUsers) { _getUsers = getUsers; }
+    public ResponseParser(GetUsers getUsers) => _getUsers = getUsers;
 
     public void Startup(dynamic data) {
         for (int i = 0; i < data.response["items"].Count; i++) {
@@ -17,34 +19,28 @@
     }
 
     public async Task ParseMSGResponse(dynamic data) {
-        string msg_id = "";
-        string msg_text = "";
-        string sender_id = "";
-
         for (int i = 0; i < data.response["items"].Count; i++) {
             try {
                 if (data.response["items"][i]["conversation"]["push_settings"]["no_sound"].ToString() == "true") continue;
             } catch {
-                msg_id = data.response["items"][i]["conversation"]["last_message_id"].ToString();
+                string msg_id = data.response["items"][i]["conversation"]["last_message_id"].ToString();
                 if (!notifiedMessages.Contains(msg_id)) {
                     if (!string.IsNullOrEmpty(msg_id)) notifiedMessages.Add(msg_id);
-                    msg_text = data.response["items"][i]["last_message"]["text"].ToString();
-
-                    MSGFormatter formatter = new MSGFormatter();
+                    string msg_text = data.response["items"][i]["last_message"]["text"].ToString();
+                    MSGFormatter formatter = new();
                     msg_text = formatter.Split(msg_text);
-
-                    sender_id = data.response["items"][i]["last_message"]["from_id"].ToString();
-
-                    dynamic senderData = await _getUsers._getUsers(Convert.ToInt32(sender_id));
+                    string sender_id = data.response["items"][i]["last_message"]["from_id"].ToString();
+                    dynamic senderData = await _getUsers._get(Convert.ToInt32(sender_id));
                     var senderData_p = ParseSenderData(senderData);
 
                     var output = (senderData_p.Item1, senderData_p.Item2, msg_text);
                     notificationQueue.Add(output);
-
                 } else continue;
             }
         }
+    }
 
+    private void Notify() {
         foreach (var output in notificationQueue) {
             notification = new NotificationHandler(output);
         }
